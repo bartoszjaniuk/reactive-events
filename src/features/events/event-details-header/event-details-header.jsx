@@ -9,23 +9,21 @@ const overlayStyle = {
 const eventContentStyle = {
   position: 'absolute',
   bottom: '5%',
-  left: '5%',
+  left: '50%',
+  transform: 'translateX(-50%)',
   width: '100%',
   color: 'white',
 };
 
-const EventDetailsHeader = () => {
+const EventDetailsHeader = ({ event }) => {
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: 0 }}>
         <Image src={'/assets/events/crossfit.jpg'} fluid style={overlayStyle} />
-        <Segment basic style={eventContentStyle}>
+        <Segment basic style={eventContentStyle} textAlign="center">
           <Item.Group>
             <Item.Content>
-              <Header size="huge" content="Event Title" style={{ color: 'white' }} />
-              <p>Event date</p>
-              <p>Max number attendees</p>
-              <p>Hosted by Bartol</p>
+              <Header size="huge" content={event.title} style={{ color: 'white' }} />
             </Item.Content>
           </Item.Group>
         </Segment>
@@ -33,7 +31,13 @@ const EventDetailsHeader = () => {
       <Segment attached="bottom">
         <Button content="Cancel my place" />
         <Button color="teal" content="Join this event" />
-        <Button as={Link} to={`/manage/`} color="orange" content="Manage event" floated="right" />
+        <Button
+          as={Link}
+          to={`/manage/${event.id}`}
+          color="orange"
+          content="Manage event"
+          floated="right"
+        />
       </Segment>
     </Segment.Group>
   );

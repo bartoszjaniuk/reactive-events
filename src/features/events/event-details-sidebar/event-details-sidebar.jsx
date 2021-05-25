@@ -1,7 +1,8 @@
 import React from 'react';
 import { Segment, Image, Item } from 'semantic-ui-react';
 
-const EventDetailsSidebar = () => {
+const EventDetailsSidebar = ({ attendees, event }) => {
+  const { hostedBy, hostPhotoURL } = event;
   return (
     <>
       <Segment.Group>
@@ -14,37 +15,27 @@ const EventDetailsSidebar = () => {
             borderBottom: 'none',
           }}
         >
-          <Image src={'/assets/user.png'} size="tiny" circular />
+          <Image src={hostPhotoURL || '/assets/user.png'} size="tiny" circular />
         </Segment>
         <Segment textAlign="center" style={{ borderTop: 'none' }}>
-          Instruktor: Bartol
+          Instruktor: {hostedBy}
         </Segment>
 
         <Segment textAlign="center" style={{ border: 'none' }} inverted color="purple">
-          Liczba uczestników : 2
+          Liczba uczestników : {attendees.length}
         </Segment>
         <Segment attached>
           <Item.Group relaxed divided>
-            <Item style={{ position: 'relative' }}>
-              <Item.Image circular size="tiny" src="/assets/user.png" />
-              <Item.Content verticalAlign="middle">
-                <Item.Header as="h3">
-                  <span>Tom</span>
-                </Item.Header>
-              </Item.Content>
-            </Item>
-          </Item.Group>
-        </Segment>
-        <Segment attached>
-          <Item.Group relaxed divided>
-            <Item style={{ position: 'relative' }}>
-              <Item.Image circular size="tiny" src="/assets/user.png" />
-              <Item.Content verticalAlign="middle">
-                <Item.Header as="h3">
-                  <span>Jerry</span>
-                </Item.Header>
-              </Item.Content>
-            </Item>
+            {attendees.map(attende => (
+              <Item key={attende.id} style={{ position: 'relative' }}>
+                <Item.Image circular size="tiny" src={attende.photoURL || '/assets/user.png'} />
+                <Item.Content verticalAlign="middle">
+                  <Item.Header as="h3">
+                    <span>{attende.displayName}</span>
+                  </Item.Header>
+                </Item.Content>
+              </Item>
+            ))}
           </Item.Group>
         </Segment>
       </Segment.Group>
