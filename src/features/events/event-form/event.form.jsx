@@ -1,5 +1,6 @@
 import cuid from 'cuid';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Segment, Header, Button } from 'semantic-ui-react';
 
 const EventForm = ({ setFormOpen, setEvents, createEvent, selectedEvent, updatedEvent }) => {
@@ -74,13 +75,7 @@ const EventForm = ({ setFormOpen, setEvents, createEvent, selectedEvent, updated
         </Form.Field>
         <Button.Group attached="bottom">
           <Button type="submit" basic color="purple" content="Submit" />
-          <Button
-            type="submit"
-            basic
-            color="red"
-            content="Cancel"
-            onClick={() => setFormOpen(false)}
-          />
+          <Button type="submit" basic color="red" content="Cancel" as={Link} to="/events" />
         </Button.Group>
       </Form>
     </Segment>
