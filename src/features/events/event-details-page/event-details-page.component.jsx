@@ -7,6 +7,7 @@ import EventDetailsChat from '../event-details-chat/event-details-chat';
 import { useSelector } from 'react-redux';
 
 const EventDetailsPage = ({ match }) => {
+  console.log(match);
   const event = useSelector(state => state.event.events.find(e => e.id === match.params.id));
   return (
     <Grid>

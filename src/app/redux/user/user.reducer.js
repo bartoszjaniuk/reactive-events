@@ -1,13 +1,24 @@
 const INITIAL_STATE = {
+  authenticated: false,
   currentUser: null,
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case 'USER_LOGIN':
+const userReducer = (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
+    case 'SIGN_IN_USER':
       return {
         ...state,
-        currentUser: action.payload,
+        authenticated: true,
+        currentUser: {
+          email: payload.email,
+          photoURL: '/assets/user.png',
+        },
+      };
+    case 'SIGN_OUT_USER':
+      return {
+        ...state,
+        authenticated: false,
+        currentUser: null,
       };
 
     default:
