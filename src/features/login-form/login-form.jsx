@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import React from 'react';
 import ModalWrapper from '../modal-wrapper/modal-wrapper';
 import * as Yup from 'yup';
-import TextInput from '../text-input/text-input';
+import TextInput from '../form-inputs/text-input/text-input';
 import { Button } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { userSignIn } from '../../app/redux/user/user.actions';

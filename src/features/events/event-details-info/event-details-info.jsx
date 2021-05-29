@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Grid, Icon, Segment } from 'semantic-ui-react';
 import format from 'date-fns/format';
+import EventDetailsMap from '../event-details-map/event-details-map';
 
 const EventDetailsInfo = ({ event }) => {
+  const [mapOpen, setMapOpen] = useState(false);
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -41,13 +43,19 @@ const EventDetailsInfo = ({ event }) => {
             <Icon size="large" color="purple" name="marker" />
           </Grid.Column>
           <Grid.Column width={11}>
-            <p>{event.venue}</p>
+            <p>{event.venue.address}</p>
           </Grid.Column>
           <Grid.Column width={4}>
-            <Button color="purple" size="tiny" content="Show Map" />
+            <Button
+              color="purple"
+              size="tiny"
+              content={mapOpen ? 'Hide Map' : 'Open Map'}
+              onClick={() => setMapOpen(!mapOpen)}
+            />
           </Grid.Column>
         </Grid>
       </Segment>
+      {mapOpen && <EventDetailsMap latLng={event.venue.latLng} />}
     </Segment.Group>
   );
 };

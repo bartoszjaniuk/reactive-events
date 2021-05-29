@@ -1,3 +1,4 @@
+/* global google */
 import cuid from 'cuid';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,13 +6,14 @@ import { Link } from 'react-router-dom';
 import { Segment, Header, Button } from 'semantic-ui-react';
 import { createEvent } from '../../../app/redux/event/event.actions';
 import { updateEvent } from '../../../app/redux/event/event.actions';
-import TextAreaInput from '../../text-area-input/text-area-input';
-import SelectInput from '../../select-input/select-input';
-import TextInput from '../../text-input/text-input';
-import DateInput from '../../date-input/date-input';
+import TextAreaInput from '../../form-inputs/text-area-input/text-area-input';
+import SelectInput from '../../form-inputs/select-input/select-input';
+import TextInput from '../../form-inputs/text-input/text-input';
+import DateInput from '../../form-inputs/date-input/date-input';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { categoryOptions } from '../../../app/api/categoryOptions';
+import CustomPlaceInput from '../../form-inputs/custom-place-input/custom-place-input';
 const EventForm = ({ match, history }) => {
   const selectedEvent = useSelector(state =>
     state.event.events.find(e => e.id === match.params.id)
@@ -20,7 +22,14 @@ const EventForm = ({ match, history }) => {
     title: '',
     category: '',
     description: '',
-    venue: '',
+    city: {
+      address: '',
+      latLng: null,
+    },
+    venue: {
+      address: '',
+      latLng: null,
+    },
     date: '',
   };
 
@@ -28,8 +37,12 @@ const EventForm = ({ match, history }) => {
     title: Yup.string().required('You must provide a title'),
     category: Yup.string().required('You must provide a category'),
     description: Yup.string().required(),
-    city: Yup.string().required(),
-    venue: Yup.string().required(),
+    city: Yup.object().shape({
+      address: Yup.string().required('City is required'),
+    }),
+    venue: Yup.object().shape({
+      address: Yup.string().required('Venue is required'),
+    }),
     date: Yup.string().required(),
   });
 
@@ -49,15 +62,25 @@ const EventForm = ({ match, history }) => {
         validationSchema={validationSchema}
         onSubmit={values => handleFormSubmit(values)}
       >
-        {({ isSubmitting, dirty, isValid }) => (
+        {({ isSubmitting, dirty, isValid, values }) => (
           <Form className="ui form">
             <Header sub color="purple" content="Event Details" />
             <TextInput name="title" placeholder="Event title" />
             <SelectInput name="category" placeholder="Event category" options={categoryOptions} />
             <TextAreaInput name="description" placeholder="Description" rows={3} />
             <Header sub color="purple" content="Event Location Details" />
-            <TextInput name="city" placeholder="City" />
-            <TextInput name="venue" placeholder="Venue" />
+            <CustomPlaceInput name="city" placeholder="City" />
+            <CustomPlaceInput
+              disabled={!values.city.latLng}
+              name="venue"
+              placeholder="Venue"
+              options={{
+                location: new google.maps.LatLng(values.city.latLng),
+                radius: 1000,
+                types: ['establishment'],
+              }}
+            />
+            {/* <TextInput name="venue" placeholder="Venue" /> */}
             <DateInput
               name="date"
               placeholderText="Event date"
