@@ -7,7 +7,6 @@ import EventForm from '../../features/events/event-form/event.form';
 import HomePage from '../../features/homepage/homepage';
 import ModalManager from '../../features/modal-manager/modal-manager';
 import Navbar from '../../features/nav/navbar';
-import PlaceInput from '../../features/form-inputs/place-input/place-input';
 
 function App() {
   const { key } = useLocation();
@@ -24,7 +23,6 @@ function App() {
               <Route exact path="/events" component={EventDashboard} />
               <Route path="/events/:id" component={EventDetailsPage} />
               <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
-              <PlaceInput />
             </Container>
           </>
         )}
