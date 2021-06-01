@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal } from 'semantic-ui-react';
 import { closeModal } from '../../app/redux/modals/modal.actions';

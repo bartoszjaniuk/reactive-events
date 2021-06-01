@@ -3,7 +3,7 @@ import { Button, Header, Segment, Comment, Form } from 'semantic-ui-react';
 const EventDetailsChat = () => {
   return (
     <>
-      <Segment textAlign="center" attached="top" inverted color="teal" style={{ border: 'none' }}>
+      <Segment textAlign="center" attached="top" inverted color="purple" style={{ border: 'none' }}>
         <Header>Chat about this event</Header>
       </Segment>
 

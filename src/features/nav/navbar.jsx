@@ -8,7 +8,6 @@ import { userSignOut } from '../../app/redux/user/user.actions';
 const Navbar = () => {
   const dispatch = useDispatch();
   const { authenticated, currentUser } = useSelector(state => state.user);
-  console.log(authenticated);
   const history = useHistory();
 
   return (

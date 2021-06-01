@@ -30,7 +30,7 @@ const EventDetailsHeader = ({ event }) => {
       </Segment>
       <Segment attached="bottom">
         <Button content="Cancel my place" />
-        <Button color="teal" content="Join this event" />
+        <Button color="purple" content="Join this event" />
         <Button
           as={Link}
           to={`/manage/${event.id}`}

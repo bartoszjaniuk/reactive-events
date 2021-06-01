@@ -1,4 +1,3 @@
-import { sampleData } from '../../api/sampleData';
 import { EventActionTypes } from './event.types';
 const INITIAL_STATE = {
   events: [],

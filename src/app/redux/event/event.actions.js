@@ -32,3 +32,10 @@ export const loadEvents = () => {
     }
   };
 };
+
+export const listenToEvents = events => {
+  return {
+    type: EventActionTypes.FETCH_EVENTS,
+    payload: events,
+  };
+};

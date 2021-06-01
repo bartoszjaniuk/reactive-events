@@ -7,14 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './app/redux/store';
-import ScrollToTop from './app/layout/scroll-to-top';
 import 'react-calendar/dist/Calendar.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ScrollToTop />
         <App />
       </BrowserRouter>
     </Provider>

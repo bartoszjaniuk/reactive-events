@@ -35,7 +35,7 @@ const LoginForm = () => {
               type="submit"
               fluid
               size="large"
-              color="teal"
+              color="purple"
               content="Login"
             />
           </Form>
