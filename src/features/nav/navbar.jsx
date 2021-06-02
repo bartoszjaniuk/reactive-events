@@ -7,7 +7,8 @@ import { openModal } from '../../app/redux/modals/modal.actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { authenticated, currentUser } = useSelector(state => state.user);
+  const { authenticated } = useSelector(state => state.user);
+  const { currentUserProfile } = useSelector(state => state.profile);
   const history = useHistory();
 
   const handleSignOut = async () => {
@@ -48,12 +49,17 @@ const Navbar = () => {
           </Menu.Item>
         ) : (
           <Menu.Item position="right">
-            <Image avatar spaced="right" src={currentUser.photoURL || '/assets/user.png'} />
-            <Dropdown pointing="top left" text={currentUser.displayName}>
+            <Image avatar spaced="right" src={currentUserProfile?.photoURL || '/assets/user.png'} />
+            <Dropdown pointing="top left" text={currentUserProfile?.displayName}>
               <Dropdown.Menu>
                 <Dropdown.Item as={Link} to="/createEvent" text="Create Event" icon="plus" />
-                <Dropdown.Item text="My profile" icon="user" />
-                <Dropdown.Item text="My account" icon="setting" as={Link} to="account" />
+                <Dropdown.Item
+                  text="My profile"
+                  icon="user"
+                  as={Link}
+                  to={`/profile/${currentUserProfile?.id}`}
+                />
+                <Dropdown.Item text="My account" icon="setting" as={Link} to="/account" />
                 <Dropdown.Item text="Sign out" icon="power" onClick={handleSignOut} />
               </Dropdown.Menu>
             </Dropdown>

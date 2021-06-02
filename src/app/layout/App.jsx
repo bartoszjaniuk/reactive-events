@@ -9,6 +9,7 @@ import EventForm from '../../features/events/event-form/event.form';
 import HomePage from '../../features/homepage/homepage';
 import ModalManager from '../../features/modal-manager/modal-manager';
 import Navbar from '../../features/nav/navbar';
+import ProfilePage from '../../features/profiles/profile-page/profile-page';
 import Error from '../errors/error';
 import firebase from '../firebase/firebase';
 import { userSignIn, verifyAuth } from '../redux/user/user.actions';
@@ -37,6 +38,7 @@ function App() {
               <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
               <Route path={'/error'} component={Error} />
               <Route path={'/account'} component={AccountPage} />
+              <Route path={'/profile/:id'} component={ProfilePage} />
             </Container>
           </>
         )}

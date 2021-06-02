@@ -18,7 +18,6 @@ const RegisterForm = () => {
 
   const handleOnSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      console.log(values);
       await registerInFirebase(values);
       setSubmitting(false);
       dispatch(closeModal());

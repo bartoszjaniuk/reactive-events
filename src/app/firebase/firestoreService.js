@@ -55,14 +55,32 @@ export const cancelEventToggle = event => {
   });
 };
 
-export const setUserProfileData = user => {
+export function setUserProfileData(user) {
   return firestore
     .collection('users')
     .doc(user.uid)
     .set({
       displayName: user.displayName,
       email: user.email,
+      photoURL: user.photoURL || null,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      photoURL: user.photoURL || 'https://fwcdn.pl/cpo/11/41/1141/361_2.4.jpg',
     });
+}
+
+export function getUserProfile(userId) {
+  return firestore.collection('users').doc(userId);
+}
+
+export const updateUserProfile = async profile => {
+  const user = firebase.auth().currentUser;
+  try {
+    if (user.displayName !== profile.displayName) {
+      await user.updateProfile({
+        displayName: profile.displayName,
+      });
+      return await firestore.collection('users').doc(user.uid).update(profile);
+    }
+  } catch (error) {
+    throw error;
+  }
 };
