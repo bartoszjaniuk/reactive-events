@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { dataFromSnapshot } from '../firebase/firestore';
+import { dataFromSnapshot } from '../firebase/firestoreService';
 import {
   asyncActionError,
   asyncActionFinish,

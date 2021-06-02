@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Icon, Item, List, Segment, Label } from 'semantic-ui-react';
 import EventListMember from '../event-list-member/event-list-member';
 import format from 'date-fns/format';
-import { deleteEventFromFirestore } from '../../../app/firebase/firestore';
+import { deleteEventFromFirestore } from '../../../app/firebase/firestoreService';
 
 const EventListItem = ({ event }) => {
   return (

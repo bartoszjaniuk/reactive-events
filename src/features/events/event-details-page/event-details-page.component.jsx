@@ -7,7 +7,7 @@ import EventDetailsChat from '../event-details-chat/event-details-chat';
 import { useDispatch, useSelector } from 'react-redux';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToEvents } from '../../../app/redux/event/event.actions';
-import { listenToEventFromFirestore } from '../../../app/firebase/firestore';
+import { listenToEventFromFirestore } from '../../../app/firebase/firestoreService';
 import EventListItemPlaceholder from '../event-list-item-placeholder/event-list-item-placeholder';
 import { Redirect } from 'react-router';
 

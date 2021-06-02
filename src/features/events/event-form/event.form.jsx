@@ -20,7 +20,7 @@ import {
   cancelEventToggle,
   listenToEventFromFirestore,
   updateEventInFirestore,
-} from '../../../app/firebase/firestore';
+} from '../../../app/firebase/firestoreService';
 import EventListItemPlaceholder from '../event-list-item-placeholder/event-list-item-placeholder';
 const EventForm = ({ match, history }) => {
   const dispatch = useDispatch();

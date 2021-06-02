@@ -1,5 +1,5 @@
 import cuid from 'cuid';
-import firebase from '../firebase/firebase';
+import firebase from './firebase';
 
 const firestore = firebase.firestore();
 export const dataFromSnapshot = snapshot => {
@@ -53,4 +53,16 @@ export const cancelEventToggle = event => {
   return firestore.collection('events').doc(event.id).update({
     isCancelled: !event.isCancelled,
   });
+};
+
+export const setUserProfileData = user => {
+  return firestore
+    .collection('users')
+    .doc(user.uid)
+    .set({
+      displayName: user.displayName,
+      email: user.email,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      photoURL: user.photoURL || 'https://fwcdn.pl/cpo/11/41/1141/361_2.4.jpg',
+    });
 };
