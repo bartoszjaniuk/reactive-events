@@ -20,6 +20,7 @@ const useFireStoreCollection = ({ firestoreQuery, data, dependencies }) => {
       error => dispatch(asyncActionError())
     );
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 

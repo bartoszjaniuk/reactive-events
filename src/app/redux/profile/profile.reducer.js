@@ -3,6 +3,7 @@ import { ProfileActionTypes } from './profile.types';
 const INITIAL_STATE = {
   currentUserProfile: null,
   selectedUserProfile: null,
+  photos: [],
 };
 
 const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -16,6 +17,11 @@ const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         selectedUserProfile: payload,
+      };
+    case ProfileActionTypes.LISTEN_TO_USER_PHOTOS:
+      return {
+        ...state,
+        photos: payload,
       };
     default:
       return state;

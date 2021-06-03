@@ -13,3 +13,10 @@ export const listenToSelectedCurrentUserProfile = profile => {
     payload: profile,
   };
 };
+
+export const listenToUserPhotos = photos => {
+  return {
+    type: ProfileActionTypes.LISTEN_TO_USER_PHOTOS,
+    payload: photos,
+  };
+};

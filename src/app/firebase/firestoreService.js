@@ -84,3 +84,48 @@ export const updateUserProfile = async profile => {
     throw error;
   }
 };
+
+export const updateUserProfilePhoto = async (downloadURL, filename) => {
+  const user = firebase.auth().currentUser;
+  const userDocRef = firestore.collection('users').doc(user.uid);
+  try {
+    const userDoc = await userDocRef.get();
+    if (!userDoc.data().photoURL) {
+      await firestore.collection('users').doc(user.uid).update({
+        photoURL: downloadURL,
+      });
+      await user.updateProfile({
+        photoURL: downloadURL,
+      });
+    }
+    return await firestore.collection('users').doc(user.uid).collection('photos').add({
+      name: filename,
+      url: downloadURL,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserPhotos = userUid => {
+  return firestore.collection('users').doc(userUid).collection('photos');
+};
+
+export async function setMainPhoto(photo) {
+  const user = firebase.auth().currentUser;
+  try {
+    await firestore.collection('users').doc(user.uid).update({
+      photoURL: photo.url,
+    });
+    return await user.updateProfile({
+      photoURL: photo.url,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function deletePhotoFromCollection(photoId) {
+  const userUid = firebase.auth().currentUser.uid;
+  return firestore.collection('users').doc(userUid).collection('photos').doc(photoId).delete();
+}

@@ -27,5 +27,6 @@ export default function useFirestoreDoc({ firestoreQuery, data, deps, shouldExec
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps); // eslint-disable-line react-hooks/exhaustive-deps
 }
