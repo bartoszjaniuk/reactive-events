@@ -39,3 +39,16 @@ export const listenToEvents = events => {
     payload: events,
   };
 };
+
+export const listenToEventChat = comments => {
+  return {
+    type: EventActionTypes.LISTEN_TO_EVENT_CHAT,
+    payload: comments,
+  };
+};
+
+export const clearComments = () => {
+  return {
+    type: EventActionTypes.CLEAR_COMMENTS,
+  };
+};

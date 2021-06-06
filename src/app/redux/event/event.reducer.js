@@ -1,6 +1,7 @@
 import { EventActionTypes } from './event.types';
 const INITIAL_STATE = {
   events: [],
+  comments: [],
 };
 // mozna zamiast action zrobić {type, payload}
 const eventReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -25,6 +26,17 @@ const eventReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         events: payload,
+      };
+    case EventActionTypes.LISTEN_TO_EVENT_CHAT:
+      return {
+        ...state,
+        comments: payload,
+      };
+
+    case EventActionTypes.CLEAR_COMMENTS:
+      return {
+        ...state,
+        comments: [],
       };
 
     default:
