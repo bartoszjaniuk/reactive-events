@@ -17,7 +17,7 @@ const useFireStoreCollection = ({ firestoreQuery, data, dependencies }) => {
         data(docs);
         dispatch(asyncActionFinish());
       },
-      error => dispatch(asyncActionError())
+      error => dispatch(asyncActionError(error))
     );
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps

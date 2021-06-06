@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Header, Image, Item, Segment } from 'semantic-ui-react';
+import { addUserAttendance, cancelUserAttendance } from '../../../app/firebase/firestoreService';
 
 const overlayStyle = {
   filter: 'brightness(70%)',
@@ -15,7 +16,30 @@ const eventContentStyle = {
   color: 'white',
 };
 
-const EventDetailsHeader = ({ event }) => {
+const EventDetailsHeader = ({ event, isHost, isGoing }) => {
+  const [loading, setLoading] = useState(false);
+  const handleUserJoinToEvent = async () => {
+    setLoading(true);
+    try {
+      await addUserAttendance(event);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUserLeaveEvent = async () => {
+    setLoading(true);
+    try {
+      await cancelUserAttendance(event);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: 0 }}>
@@ -28,16 +52,31 @@ const EventDetailsHeader = ({ event }) => {
           </Item.Group>
         </Segment>
       </Segment>
-      <Segment attached="bottom">
-        <Button content="Cancel my place" />
-        <Button color="purple" content="Join this event" />
-        <Button
-          as={Link}
-          to={`/manage/${event.id}`}
-          color="orange"
-          content="Manage event"
-          floated="right"
-        />
+      <Segment attached="bottom clearing">
+        {!isHost && (
+          <>
+            {isGoing ? (
+              <Button content="Cancel my place" onClick={handleUserLeaveEvent} loading={loading} />
+            ) : (
+              <Button
+                color="purple"
+                content="Join this event"
+                onClick={handleUserJoinToEvent}
+                loading={loading}
+              />
+            )}
+          </>
+        )}
+
+        {isHost && (
+          <Button
+            as={Link}
+            to={`/manage/${event.id}`}
+            color="orange"
+            content="Manage event"
+            floated="right"
+          />
+        )}
       </Segment>
     </Segment.Group>
   );

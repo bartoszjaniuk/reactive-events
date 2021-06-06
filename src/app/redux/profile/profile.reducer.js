@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   currentUserProfile: null,
   selectedUserProfile: null,
   photos: [],
+  profileEvents: [],
 };
 
 const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -22,6 +23,11 @@ const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         photos: payload,
+      };
+    case ProfileActionTypes.LISTEN_TO_USER_EVENTS:
+      return {
+        ...state,
+        profileEvents: payload,
       };
     default:
       return state;

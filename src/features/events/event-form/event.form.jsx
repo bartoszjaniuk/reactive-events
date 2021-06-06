@@ -62,7 +62,7 @@ const EventForm = ({ match, history }) => {
     shouldExecute: !!match.params.id,
     firestoreQuery: () => listenToEventFromFirestore(match.params.id),
     data: event => dispatch(listenToEvents([event])),
-    dependencies: [match.params.id, dispatch],
+    deps: [match.params.id, dispatch],
   });
 
   const handleCancelToggle = async event => {

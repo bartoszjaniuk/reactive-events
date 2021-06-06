@@ -22,7 +22,7 @@ export default function useFirestoreDoc({ firestoreQuery, data, deps, shouldExec
         data(dataFromSnapshot(snapshot));
         dispatch(asyncActionFinish());
       },
-      error => dispatch(asyncActionError())
+      error => dispatch(asyncActionError(error))
     );
     return () => {
       unsubscribe();

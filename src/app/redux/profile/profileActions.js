@@ -20,3 +20,10 @@ export const listenToUserPhotos = photos => {
     payload: photos,
   };
 };
+
+export const listenToUserEvents = events => {
+  return {
+    type: ProfileActionTypes.LISTEN_TO_USER_EVENTS,
+    payload: events,
+  };
+};

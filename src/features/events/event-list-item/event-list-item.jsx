@@ -6,15 +6,18 @@ import format from 'date-fns/format';
 import { deleteEventFromFirestore } from '../../../app/firebase/firestoreService';
 
 const EventListItem = ({ event }) => {
+  console.log('TUTA', event);
   return (
     <Segment.Group>
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src={event.hostPhotoURL} />
+            <Item.Image size="tiny" circular src={event.hostPhotoURL || '/assets/user.png'} />
             <Item.Content>
               <Item.Header content={event.title} />
-              <Item.Description>Hosted by {event.hostedBy} </Item.Description>
+              <Item.Description>
+                Hosted by <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>{' '}
+              </Item.Description>
               {event.isCancelled && (
                 <Label
                   style={{ top: '-20px' }}

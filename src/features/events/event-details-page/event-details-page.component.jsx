@@ -12,13 +12,16 @@ import EventListItemPlaceholder from '../event-list-item-placeholder/event-list-
 import { Redirect } from 'react-router';
 
 const EventDetailsPage = ({ match }) => {
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.user);
   const event = useSelector(state => state.event.events.find(e => e.id === match.params.id));
   const { loading, error } = useSelector(state => state.async);
-  const dispatch = useDispatch();
+  const isHost = event?.hostUid === currentUser?.uid;
+  const isGoing = event?.attendees?.some(a => a.id === currentUser.uid);
   useFirestoreDoc({
     firestoreQuery: () => listenToEventFromFirestore(match.params.id),
     data: event => dispatch(listenToEvents([event])),
-    dependencies: [match.params.id, dispatch],
+    deps: [match.params.id, dispatch],
   });
 
   if (loading || (!event && !error)) return <EventListItemPlaceholder />;
@@ -27,12 +30,12 @@ const EventDetailsPage = ({ match }) => {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventDetailsHeader event={event} />
+        <EventDetailsHeader event={event} isHost={isHost} isGoing={isGoing} />
         <EventDetailsInfo event={event} />
         <EventDetailsChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <EventDetailsSidebar event={event} attendees={event?.attendees} />
+        <EventDetailsSidebar event={event} attendees={event?.attendees} hostUid={event.hostUid} />
       </Grid.Column>
     </Grid>
   );

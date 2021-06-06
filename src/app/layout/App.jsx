@@ -12,12 +12,12 @@ import Navbar from '../../features/nav/navbar';
 import ProfilePage from '../../features/profiles/profile-page/profile-page';
 import Error from '../errors/error';
 import firebase from '../firebase/firebase';
-import { userSignIn, verifyAuth } from '../redux/user/user.actions';
+import { verifyAuth } from '../redux/user/user.actions';
 
 function App() {
   const dispatch = useDispatch();
   const { key } = useLocation();
-  const { currentUser } = useSelector(state => state.user);
+  // const { currentUser } = useSelector(state => state.user);
   useEffect(() => {
     firebase.auth().onAuthStateChanged(currentUser => {
       dispatch(verifyAuth(currentUser));
