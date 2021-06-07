@@ -27,3 +27,34 @@ export const listenToUserEvents = events => {
     payload: events,
   };
 };
+
+export const listenToFollowers = followers => {
+  return {
+    type: ProfileActionTypes.LISTEN_TO_FOLLOWERS,
+    payload: followers,
+  };
+};
+
+export const listenToFollowings = followings => {
+  return {
+    type: ProfileActionTypes.LISTEN_TO_FOLLOWINGS,
+    payload: followings,
+  };
+};
+
+export const setFollowUser = () => {
+  return {
+    type: ProfileActionTypes.SET_FOLLOW_USER,
+  };
+};
+export const setUnFollowUser = () => {
+  return {
+    type: ProfileActionTypes.SET_UNFOLLOW_USER,
+  };
+};
+
+export const clearFollowings = () => {
+  return {
+    type: ProfileActionTypes.CLEAR_FOLLOWINGS,
+  };
+};

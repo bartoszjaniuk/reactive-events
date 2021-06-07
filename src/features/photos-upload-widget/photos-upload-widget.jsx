@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import { Button, Grid, Header } from 'semantic-ui-react';
-import PhotoWidgetCropper from '../photo-widget-cropper/photo-widget-cropper';
-import PhotoWidgetDropzone from '../photo-widget-dropzone/photo-widget-dropzone';
-import cuid from 'cuid';
-import { getFileExtenstion } from '../../app/util/util';
-import { uploadToFirebaseStorage } from '../../app/firebase/firebaseService';
-import { updateUserProfilePhoto } from '../../app/firebase/firestoreService';
-const PhotosUploadWidget = ({ setEditMode }) => {
+import {useState} from "react";
+import {Button, Grid, Header} from "semantic-ui-react";
+import PhotoWidgetCropper from "../photo-widget-cropper/photo-widget-cropper";
+import PhotoWidgetDropzone from "../photo-widget-dropzone/photo-widget-dropzone";
+import cuid from "cuid";
+import {getFileExtenstion} from "../../app/util/util";
+import {uploadToFirebaseStorage} from "../../app/firebase/firebaseService";
+import {updateUserProfilePhoto} from "../../app/firebase/firestoreService";
+const PhotosUploadWidget = ({setEditMode}) => {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleUploadImage = () => {
     setLoading(true);
-    const filename = cuid() + '.' + getFileExtenstion(files[0].name);
+    const filename = cuid() + "." + getFileExtenstion(files[0].name);
     const uploadTask = uploadToFirebaseStorage(image, filename);
     uploadTask.on(
-      'state_changed',
+      "state_changed",
       snapshot => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
+        console.log("Upload is " + progress + "% done");
       },
       error => {
         alert(error.message);
@@ -66,18 +66,18 @@ const PhotosUploadWidget = ({ setEditMode }) => {
           <>
             <div
               className="img-preview"
-              style={{ minHeight: 200, minWidth: 200, overflow: 'hidden' }}
+              style={{maxHeight: 200, minWidth: 200, overflow: "hidden"}}
             />
             <Button.Group>
               <Button
-                style={{ width: 100 }}
+                style={{width: 100}}
                 positive
                 icon="check"
                 onClick={handleUploadImage}
                 loading={loading}
               />
               <Button
-                style={{ width: 100 }}
+                style={{width: 100}}
                 icon="close"
                 onClick={handleCancelCrop}
                 disabled={loading}

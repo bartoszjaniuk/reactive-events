@@ -6,7 +6,6 @@ import format from 'date-fns/format';
 import { deleteEventFromFirestore } from '../../../app/firebase/firestoreService';
 
 const EventListItem = ({ event }) => {
-  console.log('TUTA', event);
   return (
     <Segment.Group>
       <Segment>

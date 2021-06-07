@@ -5,6 +5,9 @@ const INITIAL_STATE = {
   selectedUserProfile: null,
   photos: [],
   profileEvents: [],
+  followers: [],
+  followings: [],
+  followingUser: false,
 };
 
 const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -28,6 +31,36 @@ const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         profileEvents: payload,
+      };
+    case ProfileActionTypes.LISTEN_TO_FOLLOWERS:
+      return {
+        ...state,
+        followers: payload,
+      };
+
+    case ProfileActionTypes.LISTEN_TO_FOLLOWINGS:
+      return {
+        ...state,
+        followings: payload,
+      };
+
+    case ProfileActionTypes.SET_FOLLOW_USER:
+      return {
+        ...state,
+        followingUser: true,
+      };
+
+    case ProfileActionTypes.SET_UNFOLLOW_USER:
+      return {
+        ...state,
+        followingUser: false,
+      };
+
+    case ProfileActionTypes.CLEAR_FOLLOWINGS:
+      return {
+        ...state,
+        followers: [],
+        followings: [],
       };
     default:
       return state;
