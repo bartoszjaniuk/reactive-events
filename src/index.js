@@ -4,19 +4,17 @@ import App from './app/layout/App';
 import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import {ConnectedRouter} from 'connected-react-router';
+import {Provider} from 'react-redux';
 import store from './app/redux/store';
 import 'react-calendar/dist/Calendar.css';
-
+import {history} from './app/redux/store';
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 );
 

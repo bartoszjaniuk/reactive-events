@@ -72,7 +72,7 @@ const EventDashboard = () => {
           )}
         </Grid.Column>
         <Grid.Column width={6}>
-          {authenticated && <EventsFeed />}
+          {/* {authenticated && <EventsFeed />} */}
           <EventFilters predicate={predicate} setPredicate={handleSetPredicate} loading={loading} />
         </Grid.Column>
         <Grid.Column width={10}>

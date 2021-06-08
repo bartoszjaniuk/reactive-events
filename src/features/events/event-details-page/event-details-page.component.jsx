@@ -16,8 +16,8 @@ const EventDetailsPage = ({match}) => {
   const {currentUser} = useSelector(state => state.user);
   const event = useSelector(state => state.event.selectedEvent);
   const {loading, error} = useSelector(state => state.async);
-  const isHost = event?.hostUid === currentUser.uid;
-  const isGoing = event?.attendees?.some(a => a.id === currentUser.uid);
+  const isHost = event?.hostUid === currentUser?.uid;
+  const isGoing = event?.attendees?.some(a => a.id === currentUser?.uid);
   useFirestoreDoc({
     firestoreQuery: () => listenToEventFromFirestore(match.params.id),
     data: event => dispatch(listenToSelectedEvent(event)),

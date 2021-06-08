@@ -4,7 +4,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/storage';
 const firebaseConfig = {
-  apiKey: 'AIzaSyD7MlKPWrv7X-MBxWWxYAqaPLwdIATTiAc',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'reactivefitness-6cb79.firebaseapp.com',
   projectId: 'reactivefitness-6cb79',
   storageBucket: 'reactivefitness-6cb79.appspot.com',

@@ -1,7 +1,7 @@
-import { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, useLocation } from 'react-router';
-import { Container } from 'semantic-ui-react';
+import {Fragment, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Route, useLocation} from 'react-router';
+import {Container} from 'semantic-ui-react';
 import AccountPage from '../../features/account-page/account-page';
 import EventDashboard from '../../features/events/event-dashboard/event-dashboard';
 import EventDetailsPage from '../../features/events/event-details-page/event-details-page.component';
@@ -12,11 +12,12 @@ import Navbar from '../../features/nav/navbar';
 import ProfilePage from '../../features/profiles/profile-page/profile-page';
 import Error from '../errors/error';
 import firebase from '../firebase/firebase';
-import { verifyAuth } from '../redux/user/user.actions';
+import {verifyAuth} from '../redux/user/user.actions';
+import PrivateRoute from './private-route';
 
 function App() {
   const dispatch = useDispatch();
-  const { key } = useLocation();
+  const {key} = useLocation();
   // const { currentUser } = useSelector(state => state.user);
   useEffect(() => {
     firebase.auth().onAuthStateChanged(currentUser => {
@@ -35,10 +36,14 @@ function App() {
             <Container className="main">
               <Route exact path="/events" component={EventDashboard} />
               <Route path="/events/:id" component={EventDetailsPage} />
-              <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
+              <PrivateRoute
+                path={['/createEvent', '/manage/:id']}
+                component={EventForm}
+                key={key}
+              />
               <Route path={'/error'} component={Error} />
-              <Route path={'/account'} component={AccountPage} />
-              <Route path={'/profile/:id'} component={ProfilePage} />
+              <PrivateRoute path={'/account'} component={AccountPage} />
+              <PrivateRoute path={'/profile/:id'} component={ProfilePage} />
             </Container>
           </>
         )}
