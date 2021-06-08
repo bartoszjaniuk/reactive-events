@@ -1,10 +1,12 @@
-import { EventActionTypes } from './event.types';
+import {EventActionTypes} from './event.types';
 const INITIAL_STATE = {
   events: [],
   comments: [],
+  moreEvents: true,
+  selectedEvent: null,
 };
 // mozna zamiast action zrobić {type, payload}
-const eventReducer = (state = INITIAL_STATE, { type, payload }) => {
+const eventReducer = (state = INITIAL_STATE, {type, payload}) => {
   switch (type) {
     case EventActionTypes.CREATE_EVENT:
       return {
@@ -25,7 +27,8 @@ const eventReducer = (state = INITIAL_STATE, { type, payload }) => {
     case EventActionTypes.FETCH_EVENTS:
       return {
         ...state,
-        events: payload,
+        events: [...state.events, ...payload.events],
+        moreEvents: payload.moreEvents,
       };
     case EventActionTypes.LISTEN_TO_EVENT_CHAT:
       return {
@@ -37,6 +40,17 @@ const eventReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         comments: [],
+      };
+    case EventActionTypes.LISTEN_TO_SELECTED_EVENT:
+      return {
+        ...state,
+        selectedEvent: payload,
+      };
+    case EventActionTypes.CLEAR_EVENTS:
+      return {
+        ...state,
+        events: [],
+        moreEvents: true,
       };
 
     default:

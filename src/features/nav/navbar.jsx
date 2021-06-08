@@ -1,20 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useHistory } from 'react-router-dom';
-import { Container, Menu, Icon, Button, Dropdown, Image } from 'semantic-ui-react';
-import { signOutFirebase } from '../../app/firebase/firebaseService';
-import { openModal } from '../../app/redux/modals/modal.actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, NavLink, useHistory} from 'react-router-dom';
+import {Container, Menu, Icon, Button, Dropdown, Image} from 'semantic-ui-react';
+import {signOutFirebase} from '../../app/firebase/firebaseService';
+import {openModal} from '../../app/redux/modals/modal.actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { authenticated } = useSelector(state => state.user);
-  const { currentUserProfile } = useSelector(state => state.profile);
+  const {authenticated} = useSelector(state => state.user);
+  const {currentUserProfile} = useSelector(state => state.profile);
   const history = useHistory();
 
   const handleSignOut = async () => {
     try {
-      await signOutFirebase();
       history.push('/');
+      await signOutFirebase();
     } catch (error) {
       console.log(error);
     }
@@ -37,14 +37,14 @@ const Navbar = () => {
               basic
               inverted
               content="Login"
-              onClick={() => dispatch(openModal({ modalType: 'LoginForm' }))}
+              onClick={() => dispatch(openModal({modalType: 'LoginForm'}))}
             />
             <Button
               basic
               inverted
               content="Register"
-              style={{ marginLeft: '0.5rem' }}
-              onClick={() => dispatch(openModal({ modalType: 'RegisterForm' }))}
+              style={{marginLeft: '0.5rem'}}
+              onClick={() => dispatch(openModal({modalType: 'RegisterForm'}))}
             />
           </Menu.Item>
         ) : (
